@@ -21,7 +21,7 @@ $(function() {
   var connected = false;
   var typing = false;
   var lastTypingTime;
-  var $currentInput = $usernameInput.focus();
+  var $currentInput = $usernameInput//.focus();
 
   var socket = io();
 
@@ -44,11 +44,12 @@ $(function() {
       $loginPage.fadeOut();
       $chatPage.show();
       $loginPage.off("click");
-      $currentInput = $inputMessage.focus();
+      $currentInput = $inputMessage//.focus();
 
       // Tell the server your username
       socket.emit("add user", username);
     }
+    console.log("This is the Chat" + username);
   }
 
   // Sends a chat message
@@ -193,7 +194,7 @@ $(function() {
   $window.keydown(function (event) {
     // Auto-focus the current input when a key is typed
     if (!(event.ctrlKey || event.metaKey || event.altKey)) {
-      $currentInput.focus();
+      $currentInput//.focus();
     }
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
@@ -215,12 +216,12 @@ $(function() {
 
   // Focus input when clicking anywhere on login page
   $loginPage.click(function () {
-    $currentInput.focus();
+    $currentInput//.focus();
   });
 
   // Focus input when clicking on the message input's border
   $inputMessage.click(function () {
-    $inputMessage.focus();
+    $inputMessage//.focus();
   });
 
   // Socket events
