@@ -178,3 +178,20 @@ form {
 	background: #eee;
 } */
 
+.wrapper {
+  display: grid;
+	grid-template-columns: 33% 33% 33%;
+  grid-gap: 10px;
+  background-color: #d3cfcf;
+  color: #444;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}

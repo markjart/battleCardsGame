@@ -9,7 +9,7 @@ app.get('/signin', authController.signin);
 
 
 app.post('/signup', passport.authenticate('local-signup',  { successRedirect: '/dashboard',
-                                                    failureRedirect: '/signup'}
+                                                    failureRedirect: '/signin'}
                                                     ));
 
 
@@ -20,7 +20,7 @@ app.get('/logout',authController.logout);
 
 
 app.post('/signin', passport.authenticate('local-signin',  { successRedirect: '/dashboard',
-                                                    failureRedirect: '/signin'}
+                                                    failureRedirect: '/signup'}
                                                     ));
 
 

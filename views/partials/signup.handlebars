@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html>
  
 <head>
@@ -16,5 +16,38 @@
         <input class="btn" type="submit" value="Sign Up" />
     </form>
  
-</body>
+</body> --}}
  
+
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>{{msg}}</h1>
+    <h1 class="display-4">Sign in or sign up!</h1>
+    <form id="signup" name="signup" method="post" action="/signup">
+        <label for="username">User Name</label>
+        <br>
+        <input maxlength="14" name="username" type="text" />
+        <br>
+        <label for="email">Email Address</label>
+        <br>
+        <input class="text" name="email" type="email" />
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input name="password" type="password" />
+        <br>
+        <br>
+        <input class="btn" type="submit" value="Sign Up" />
+    </form>
+  </div>
+</div>
+
+</body>

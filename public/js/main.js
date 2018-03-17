@@ -49,7 +49,6 @@ $(function() {
       // Tell the server your username
       socket.emit("add user", username);
     }
-    console.log("This is the Chat" + username);
   }
 
   // Sends a chat message

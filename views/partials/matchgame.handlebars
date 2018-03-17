@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Passport with Sequelize</title>
+  	<link rel="stylesheet" type="text/css" href="styles/style.css">
+<style>
+#stage {
+  border: 1px outset #ccc;
+  margin: 0, auto;
+  margin-left: 350px;
+  margin-right: 350px;
+  background-color: grey;
+}
+
+#felt {
+  position: relative;
+  margin-left: 150px;
+  margin-right: 150px;
+  height: 500px;
+
+  background: black;
+  background-image: -webkit-repeating-linear-gradient(bottom right, rgba(255,255,255,0), rgba(255,255,255,0) 80px, rgba(255,255,255,0.2) 80px, rgba(255,255,255,0.2) 150px);
+  background-image: -moz-repeating-linear-gradient(bottom right, rgba(255,255,255,0), rgba(255,255,255,0) 80px, rgba(255,255,255,0.2) 80px, rgba(255,255,255,0.2) 150px);
+  background-image: -o-repeating-linear-gradient(bottom right, rgba(255,255,255,0), rgba(255,255,255,0) 80px, rgba(255,255,255,0.2) 80px, rgba(255,255,255,0.2) 150px);
+  background-image: -ms-repeating-linear-gradient(bottom right, rgba(255,255,255,0), rgba(255,255,255,0) 80px, rgba(255,255,255,0.2) 80px, rgba(255,255,255,0.2) 150px);
+  background-image: repeating-linear-gradient(to top left, rgba(255,255,255,0), rgba(255,255,255,0) 80px, rgba(255,255,255,0.2) 80px, rgba(255,255,255,0.2) 150px);
+
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+} 
+
+#felt div {
+  position: absolute;
+  left: -113px;
+  top: 200px;
+  z-index: 0;
+
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+
+  -webkit-transition-property: left, top, -webkit-transform;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out, ease-out, ease-in-out;
+}
+
+
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-info justify-content-between">
+  <a class="navbar-brand">Bad Ass Games Here!</a>
+</nav>
+<br>
+<div class="row">
+  <div class="col-md-4 chatPlace">
+    <div class="chatty">
+      <ul class="pages">
+        <li class="chat page">
+          <div class="chatArea">
+            <ul class="messages"></ul>
+          </div>
+          <input class="inputMessage" placeholder="Type here..."/>
+        </li>
+      </ul>
+    </div>
+    <ul class="pages">
+      <li class="login page">
+        <div class="form">
+        <h3 class="title">What's your screenname?</h3>
+        <input class="usernameInput" type="text" maxlength="14" />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-8 gameArea">
+  	<div id="stage"><!-- --></div>
+
+  </div>
+</div>
+<script>
+
+// Original JavaScript code by Chirp Internet: www.chirp.com.au
+// Please acknowledge use of this code by including this header.
+
+var CardGame = function(targetId)
+{
+  // private variables
+  var cards = []
+  var card_value = ["1C","2C","3C","4C","5C","6C","7C","8C","1H","2H","3H","4H","5H","6H","7H","8H"];
+
+  var started = false;
+  var matches_found = 0;
+  var card1 = false, card2 = false;
+
+  var hideCard = function(id) // turn card face down
+  {
+    cards[id].firstChild.src = "imgs/back.jpg";
+    with(cards[id].style) {
+      WebkitTransform = MozTransform = OTransform = msTransform = "scale(1.0) rotate(180deg)";
+    }
+  };
+
+  var moveToPack = function(id) // move card to pack
+  {
+    hideCard(id);
+    cards[id].matched = true;
+    with(cards[id].style) {
+      zIndex = "1000";
+      top = "200px";
+      left = "560px";
+      WebkitTransform = MozTransform = OTransform = msTransform = "rotate(0deg)";
+      zIndex = "0";
+    }
+  };
+
+  var moveToPlace = function(id) // deal card
+  {
+    cards[id].matched = false;
+    with(cards[id].style) {
+      zIndex = "1000";
+      top = cards[id].fromtop + "px";
+      left = cards[id].fromleft + "px";
+      WebkitTransform = MozTransform = OTransform = msTransform = "rotate(180deg)";
+      zIndex = "0";
+    }
+  };
+
+  var showCard = function(id) // turn card face up, check for match
+  {
+    if(id === card1) return;
+    if(cards[id].matched) return;
+
+    cards[id].firstChild.src = "imgs/" + card_value[id] + ".png";
+    with(cards[id].style) {
+      WebkitTransform = MozTransform = OTransform = msTransform = "scale(1.2) rotate(185deg)";
+    }
+
+    if(card1 !== false) {
+      card2 = id;
+      if(parseInt(card_value[card1]) == parseInt(card_value[card2])) { // match found
+        (function(card1, card2) {
+          setTimeout(function() { moveToPack(card1); moveToPack(card2); }, 1000);
+        })(card1, card2);
+        if(++matches_found == 8) { // game over, reset
+          matches_found = 0;
+          started = false;
+        }
+      } else { // no match
+        (function(card1, card2) {
+          setTimeout(function() { hideCard(card1); hideCard(card2); }, 800);
+        })(card1, card2);
+      }
+      card1 = card2 = false;
+    } else { // first card turned over
+      card1 = id;
+    }
+  };
+
+  var cardClick = function(id)
+  {
+    if(started) {
+      showCard(id);
+    } else {
+      // shuffle and deal cards
+      card_value.sort(function() { return Math.round(Math.random()) - 0.5; });
+      for(i=0; i < 16; i++) {
+        (function(idx) {
+          setTimeout(function() { moveToPlace(idx); }, idx * 100);
+        })(i);
+      }
+      started = true;
+    }
+  };
+
+  // initialise
+
+  var stage = document.getElementById(targetId);
+  var felt = document.createElement("div");
+  felt.id = "felt";
+  stage.appendChild(felt);
+
+  // template for card
+  var card = document.createElement("div");
+  card.innerHTML = "<img src='/imgs/back.jpg'>";
+
+  for(var i=0; i < 16; i++) {
+    var newCard = card.cloneNode(true);
+
+    newCard.fromtop = 15 + 120 * Math.floor(i/4);
+    newCard.fromleft = 70 + 100 * (i%4);
+    (function(idx) {
+      newCard.addEventListener("click", function() { cardClick(idx); }, false);
+    })(i);
+
+    felt.appendChild(newCard);
+    cards.push(newCard);
+  }
+
+}
+
+  var game = new CardGame("stage");
+
+</script>
+
+</html>
