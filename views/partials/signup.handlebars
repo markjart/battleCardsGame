@@ -1,0 +1,58 @@
+{{!-- <!DOCTYPE html>
+<html>
+ 
+<head>
+    <title></title>
+</head>
+ 
+<body>
+    <form id="signup" name="signup" method="post" action="/signup">
+        <label for="email">Email Address</label>
+        <input class="text" name="email" type="email" />
+        <label for="username">User Name</label>
+        <input class="usernameInput" maxlength="14" name="username" type="text" />
+        <label for="password">Password</label>
+        <input name="password" type="password" />
+        <input class="btn" type="submit" value="Sign Up" />
+    </form>
+ 
+</body> --}}
+ 
+
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>{{msg}}</h1>
+    <h1 class="display-4">Sign Up to Play</h1>
+    <form id="signup" name="signup" method="post" action="/signup">
+        <label for="username">User Name</label>
+        <br>
+        <input maxlength="14" name="username" type="text" />
+        <br>
+        <label for="email">Email Address</label>
+        <br>
+        <input class="text" name="email" type="email" />
+        <br>
+        <label for="password">Password</label>
+        <br>
+        <input name="password" type="password" />
+        <br>
+        <br>
+        <input class="btn" type="submit" value="Sign Up" />
+    </form>
+    <form method="POST" action="/signup">
+        <label for="btnLink">Already Signed Up?</label>
+        <br>
+        <button class="btn" name="btnLink" type="submit">Sign In</button>
+    </form>
+  </div>
+</div>
+
+</body>

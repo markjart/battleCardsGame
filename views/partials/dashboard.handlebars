@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <nav id="navass" class="navbar">
+    <div class="wrapper">
+      <div class="navbox">
+        <h2>BoredGames</h2>
+      </div>
+      <div class="navbox"></div>
+      <div class="navbox">
+        <form class="rightForm" method="POST" action="/signin">
+          <button class="btn" type="submit">Logout</button>
+        </form>
+
+
+
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <div class="row">
+    <div class="wrapper">
+      <div class="box a">
+
+        <form class="gamepre" method="POST" action="/matchgame">
+        <img src="imgs/match.png" class="match">
+        <br>
+          <button class="btn" type="submit" class="matcher">Match Game</button>
+        </form>
+      </div>
+      <div class="box b">
+        <form  class="gamepre"method="POST" action="/snakegame">
+        <img src="imgs/snake.png" class="sneaky-snake">
+        <br>
+          <button class="btn" type="submit" class="snake">Snake</button>
+        </form>
+      </div>
+      <div class="box c">
+        <form class="gamepre" method="POST" action="/ticTacToeGame">
+        <img src="imgs/tic-tac-toe.png" class="tic-tac">
+        <br>
+        <button class="btn" type="submit" class="tac">Tic-Tac-Toe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

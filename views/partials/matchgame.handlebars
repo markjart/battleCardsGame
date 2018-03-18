@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+  <link rel="stylesheet" type="text/css" href="styles/css-animation.css">
+</head>
+
+<body>
+  <nav id="navass" class="navbar">
+  <div class="wrapper">
+    <div class="navbox">
+       <h2>BoredGames</h2>
+    </div>
+    <div class="navbox"></div>
+    <div class="navbox">
+        <form class="rightForm" method="POST" action="/dashboard">
+          <button  class="btn" type="submit">Back to Games</button>
+        </form>
+        <form class="rightForm" method="POST" action="/signin">
+          <button  class="btn" type="submit">Logout</button>
+        </form>      
+
+    </div>
+  </div>
+  </nav>
+  <br>
+  <div id="gameNchat" class="row">
+    <div class="col-lg-4 chatPlace">
+      <div class="chatty">
+        <ul class="pages">
+          <li class="chat page">
+            <div class="chatArea">
+              <ul class="messages"></ul>
+            </div>
+            <input class="inputMessage" placeholder="Type here..." />
+          </li>
+        </ul>
+      </div>
+      <ul class="pages">
+        <li class="login page">
+          <div class="form">
+            <h3 class="title">What's your screenname?</h3>
+            <input class="usernameInput" type="text" maxlength="14" />
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-8 gameArea">
+      <div id="stage">
+        <!-- -->
+      </div>
+    </div>
+  </div>
+  <script src="/js/css-animation2.js"></script>
+  <script>
+    var game = new CardGame("stage");
+  </script>
+
+</html>
