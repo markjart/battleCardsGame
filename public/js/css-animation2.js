@@ -13,7 +13,7 @@ var CardGame = function(targetId)
 
   var hideCard = function(id) // turn card face down
   {
-    cards[id].firstChild.src = "back.jpg";
+    cards[id].firstChild.src = "imgs/back.jpg";
     with(cards[id].style) {
       WebkitTransform = MozTransform = OTransform = msTransform = "scale(1.0) rotate(180deg)";
     }
@@ -49,7 +49,7 @@ var CardGame = function(targetId)
     if(id === card1) return;
     if(cards[id].matched) return;
 
-    cards[id].firstChild.src = "" + card_value[id] + ".png";
+    cards[id].firstChild.src = "imgs/" + card_value[id] + ".png";
     with(cards[id].style) {
       WebkitTransform = MozTransform = OTransform = msTransform = "scale(1.2) rotate(185deg)";
     }
@@ -100,7 +100,7 @@ var CardGame = function(targetId)
 
   // template for card
   var card = document.createElement("div");
-  card.innerHTML = "<img src=\"back.jpg\">";
+  card.innerHTML = "<img src='imgs/back.jpg'>";
 
   for(var i=0; i < 16; i++) {
     var newCard = card.cloneNode(true);
